@@ -1,0 +1,61 @@
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 36px 32px;
+
+    &__title {
+        margin: 0;
+        font-size: 18px;
+        color: $main-font-color;
+    }
+
+    &__subtitle {
+        margin-top: 16px;
+        margin-bottom: 30px;
+        font-size: 10px;
+        color: $second-font-color;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__image-loader {
+        width: 338px;
+        height: 219px;
+        border: 2px dashed $margin-color;
+        background-color: $second-background;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 19px;
+    }
+
+    &__image {
+        width: 114px;
+        margin-bottom: 37px;
+    }
+
+    &__text {
+        font-size: 12px;
+        color: $third-font-color;
+    }
+
+    &__button {
+        margin-top: 22px;
+        background-color: $button-color;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 8px 16px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+}
