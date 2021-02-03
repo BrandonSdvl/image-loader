@@ -29,10 +29,12 @@ export default {
       };
     },
     validate(type) {
+      this.$parent.loading = true;
       let regex = /image/;
       if (regex.test(type)) {
         let file = this.files[0];
-        this.send(file);
+        setTimeout(() => this.send(file), 5000);
+        // this.send(file);
       } else {
         alert("The file selcted isn't an image");
       }
@@ -47,11 +49,11 @@ export default {
       this.files = e.target.files;
       if (this.files[0]) this.validate(this.files[0].type);
     },
-    send(file) {
+    async send(file) {
       let data = new FormData();
       data.append("file", file);
 
-      this.$http({
+      await this.$http({
         url: "http://localhost:3000/upload",
         body: data,
         method: "POST",
@@ -61,6 +63,8 @@ export default {
       })
         .then(response => {
           console.log(response);
+          this.$parent.loading = false;
+          this.$parent.uploaded = true;
         })
         .catch(errorResponse => {
           console.log(errorResponse);

@@ -1,0 +1,31 @@
+.card__status {
+    width: 340px;
+    height: 6px;
+    margin-top: 31px;
+    margin-bottom: 7px;
+    border-radius: 8px;
+    background-color:#F2F2F2;
+    overflow: hidden;
+
+    &:after {
+        display: block;
+        content: "";
+        width: 100px;
+        height: 6px;
+        border-radius: 8px;
+        background-color: $button-color;
+        animation-name: loading;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100px);
+    }
+    100% {
+        transform: translateX(340px);
+    }
+}
