@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const multer = require("multer");
+const fs = require("fs");
 
 app.use(cors());
 let whitelist = ["http://localhost:3000"];
@@ -33,13 +34,37 @@ app.use(express.static("./dist"));
 
 app.get("/", cors(corsOptions), (req, res) => {
   res.setHeader("Content-Type", "text/html");
-  res.sendFile("./public/index.html");
+  res.sendFile("./dist/index.html");
 });
 
 app.get("/upload", cors(corsOptions));
 
-app.post("/upload", upload.single("file"), (req, res) => {
-  res.status(200).json({ response: "success", message: "Image Uploaded" });
+app.post("/upload", upload.single("file"), (req, res, next) => {
+  const file = req.file;
+  if (!file) {
+    const error = new Error("Please upload a file");
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  res.send(file);
+});
+
+app.get("/images/:img", (req, res) => {
+  let file = `${__dirname}/images/${req.params.img}`;
+  fs.access(file, fs.constants.F_OK, err => {
+    if (err) {
+      console.log("El archivo no existe");
+      res.send("File not found");
+    } else {
+      res.writeHead(200, { "content-type": "image/jpg" });
+      fs.createReadStream(file).pipe(res);
+      console.log("El archivo existe");
+    }
+  });
+});
+
+app.get("/images", (req, res) => {
+  res.send("Go to main page to upload an image");
 });
 
 app.listen(PORT, () => console.log(`Server is up on port: ${PORT}`));

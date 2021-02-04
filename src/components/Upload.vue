@@ -33,7 +33,7 @@ export default {
       let regex = /image/;
       if (regex.test(type)) {
         let file = this.files[0];
-        setTimeout(() => this.send(file), 5000);
+        setTimeout(() => this.send(file), 1000);
         // this.send(file);
       } else {
         alert("The file selcted isn't an image");
@@ -65,6 +65,10 @@ export default {
           console.log(response);
           this.$parent.loading = false;
           this.$parent.uploaded = true;
+          this.$parent.imgPath = `http://192.168.0.3:3000${
+            response.body.path.split("server")[1]
+          }`;
+          console.log(this.$parent.imgPath);
         })
         .catch(errorResponse => {
           console.log(errorResponse);
