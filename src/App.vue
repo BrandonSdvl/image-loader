@@ -22,7 +22,8 @@ export default {
     return {
       loading: false,
       uploaded: false,
-      imgPath: ""
+      imgPath: "",
+      host: "http://localhost:3000"
     };
   }
 };

@@ -12,6 +12,7 @@ article.card__content
   span.card__text Or
   input#file.card__file.card__button(
     name="file",
+    ref="fileInput",
     type="file",
     accept="image/*",
     @change="fileSelected"
@@ -33,8 +34,7 @@ export default {
       let regex = /image/;
       if (regex.test(type)) {
         let file = this.files[0];
-        setTimeout(() => this.send(file), 1000);
-        // this.send(file);
+        this.send(file);
       } else {
         alert("The file selcted isn't an image");
       }
@@ -52,9 +52,10 @@ export default {
     async send(file) {
       let data = new FormData();
       data.append("file", file);
+      this.$refs.fileInput.value = null;
 
       await this.$http({
-        url: "http://localhost:3000/upload",
+        url: `${this.$parent.host}/upload`,
         body: data,
         method: "POST",
         headers: {
@@ -62,13 +63,9 @@ export default {
         }
       })
         .then(response => {
-          console.log(response);
           this.$parent.loading = false;
           this.$parent.uploaded = true;
-          this.$parent.imgPath = `http://192.168.0.3:3000${
-            response.body.path.split("server")[1]
-          }`;
-          console.log(this.$parent.imgPath);
+          this.$parent.imgPath = `${this.$parent.host}/${response.body.path}`;
         })
         .catch(errorResponse => {
           console.log(errorResponse);
