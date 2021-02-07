@@ -65,7 +65,9 @@ export default {
         .then(response => {
           this.$parent.loading = false;
           this.$parent.uploaded = true;
-          this.$parent.imgPath = `${this.$parent.host}${response.body.path}`;
+          this.$parent.imgPath = `${this.$parent.host}${
+            response.body.path.split("server")[1]
+          }`;
         })
         .catch(errorResponse => {
           console.log(errorResponse);
