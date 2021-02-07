@@ -13,7 +13,7 @@ app.use(express.static(`${__dirname}/dist`));
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./images");
+    cb(null, `${__dirname}/images`);
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
@@ -21,16 +21,6 @@ let storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
-/*app.get("/", (req, res) => {
-  res.setHeader("Content-Type", "text/html");
-  res.sendFile(`${__dirname}/dist/index.html`);
-});*/
-
-app.get("/upload", (req, res) => {
-  res.setHeader("Content-Type", "text/html");
-  res.redirect("/");
-});
 
 app.post("/upload", upload.single("file"), (req, res, next) => {
   const file = req.file;
@@ -54,13 +44,7 @@ app.get("/images/:img", (req, res) => {
   });
 });
 
-app.get("/images", (req, res) => {
-  res.setHeader("Content-Type", "text/html");
-  res.redirect("/");
-});
-
 app.get("/*", (req, res) => {
-  res.setHeader("Content-Type", "text/html");
   res.redirect("/");
 });
 
