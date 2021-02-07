@@ -23,7 +23,8 @@ export default {
       loading: false,
       uploaded: false,
       imgPath: "",
-      host: "http://localhost:3000"
+      host: "https://image-uploader-b.herokuapp.com"
+      // host: "http://localhost:3000"
     };
   }
 };

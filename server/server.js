@@ -1,5 +1,6 @@
 const PORT = process.env.PORT || 3000;
-const HOST = "http://localhost:" + process.env.PORT || 3000;
+// const HOST = "http://localhost:" + process.env.PORT || 3000;
+const HOST = "https://image-uploader-b.herokuapp.com";
 const express = require("express");
 const app = express();
 const cors = require("cors");
