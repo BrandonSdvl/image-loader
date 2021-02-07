@@ -7,6 +7,9 @@ const multer = require("multer");
 const fs = require("fs");
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(`${__dirname}/dist`));
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -19,14 +22,10 @@ let storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("./dist"));
-
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
   res.setHeader("Content-Type", "text/html");
-  res.sendFile("../dist/index.html");
-});
+  res.sendFile(`${__dirname}/dist/index.html`);
+});*/
 
 app.get("/upload", (req, res) => {
   res.setHeader("Content-Type", "text/html");
