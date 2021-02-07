@@ -1,6 +1,5 @@
 const PORT = process.env.PORT || 3000;
 // const HOST = "http://localhost:" + process.env.PORT || 3000;
-const HOST = "https://image-uploader-b.herokuapp.com";
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -8,16 +7,6 @@ const multer = require("multer");
 const fs = require("fs");
 
 app.use(cors());
-let whitelist = [HOST];
-let corsOptions = {
-  origin: function(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
-};
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -34,12 +23,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./dist"));
 
-app.get("/", cors(corsOptions), (req, res) => {
+app.get("/", (req, res) => {
   res.setHeader("Content-Type", "text/html");
   res.sendFile("../dist/index.html");
 });
 
-app.get("/upload", cors(corsOptions), (req, res) => {
+app.get("/upload", (req, res) => {
   res.setHeader("Content-Type", "text/html");
   res.redirect("/");
 });
