@@ -6,15 +6,15 @@
 
 <div align="center">
   <h3>
-    <a href="https://image-uploader-b.herokuapp.com/">
+    <a target="_blank" href="https://image-uploader-b.herokuapp.com/">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a target="_blank" href="https://devchallenges.io/solutions/jL0gn4b2yZFYTaq5OAL6">
       Solution
     </a>
     <span> | </span>
-    <a href="https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx">
+    <a target="_blank" href="https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx">
       Challenge
     </a>
   </h3>
@@ -37,8 +37,9 @@ This is a full-stack web application created using VueJS on the frontend and Nod
 ### Built With
 
 - [Vue.js](https://vuejs.org/)
-- [Sass](https://sass-lang.com/)
 - [NodeJS](https://nodejs.org/)
+- [Sass](https://sass-lang.com/)
+- [Pug](https://pugjs.org/)
 
 ## Features
 
